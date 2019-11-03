@@ -22,7 +22,7 @@ genrule(
     srcs = ["rasterize_triangles_grad.cc",
             "rasterize_triangles_op.cc",
             "rasterize_triangles_impl.cc",
-            "rasterize_triangles_impl.h"],
+            ],
     outs = ["rasterize_triangles_kernel.so"],
     cmd = "TF_INC=$$($(PYTHON) -c 'import tensorflow as tf; print(tf.sysconfig.get_include())');\
            TF_LIB=$$($(PYTHON) -c 'import tensorflow as tf; print(tf.sysconfig.get_lib())'); \

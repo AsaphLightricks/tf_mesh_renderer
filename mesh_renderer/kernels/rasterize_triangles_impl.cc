@@ -109,6 +109,7 @@ void RasterizeTrianglesImpl(const float* vertices, const int32* triangles,
                             int32 triangle_count, int32 image_width,
                             int32 image_height, int32* triangle_ids,
                             float* barycentric_coordinates, float* z_buffer) {
+
   const float half_image_width = 0.5 * image_width;
   const float half_image_height = 0.5 * image_height;
   float unnormalized_matrix_inverse[9];
@@ -133,6 +134,16 @@ void RasterizeTrianglesImpl(const float* vertices, const int32* triangles,
     const float v1y = vertices[v1_x_id + 1];
     const float v2x = vertices[v2_x_id];
     const float v2y = vertices[v2_x_id + 1];
+
+    const float u1x = v1x - v0x;
+    const float u1y = v1y - v0y;
+    const float u2x = v2x - v0x;
+    const float u2y = v2y - v0y;
+
+    const float cross_z = u1x * u2y - u1y * u2x;
+    if (cross_z < 0){
+        continue;
+    }
 
     ComputeUnnormalizedMatrixInverse(v0x, v1x, v2x, v0y, v1y, v2y, v0w, v1w,
                                      v2w, unnormalized_matrix_inverse);
