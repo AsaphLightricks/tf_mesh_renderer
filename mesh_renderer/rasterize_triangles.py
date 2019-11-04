@@ -25,7 +25,7 @@ import matplotlib.pyplot as plt
 
 from mesh_renderer import camera_utils
 
-rasterize_triangles_module = tf.load_op_library('rasterize_triangles_kernel.so')
+rasterize_triangles_module = tf.load_op_library('mesh_renderer/kernels/rasterize_triangles_kernel.so')
 
 
 # os.path.join(os.environ['TEST_SRCDIR'],
